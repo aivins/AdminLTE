@@ -5,7 +5,7 @@
     "type": "git",
     "url": "git://github.com/almasaeed2010/AdminLTE.git"
   },
-  "jpsm", {
+  "jpsm": {
     "main": "dist/js/app"
   },
   "license": "MIT",
