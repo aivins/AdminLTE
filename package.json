@@ -1,5 +1,6 @@
 {
   "name": "admin-lte",
+  "main": "dist/main.js",
   "version": "2.3.2",
   "repository": {
     "type": "git",
@@ -23,7 +24,8 @@
   },
   "jspm": {
     "dependencies": {
-      "jquery": "github:components/jquery@2.2.0"
+      "jquery": "github:components/jquery@2.2.0",
+      "bootstrap": "github:twbs/bootstrap@^3.3.6" 
     }
   }
 }
