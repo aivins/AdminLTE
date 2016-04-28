@@ -20,5 +20,10 @@
     "grunt-cssjanus": "^0.2.4",
     "grunt-image": "^1.0.5",
     "grunt-includes": "^0.4.5"
+  },
+  "jspm": {
+    "dependencies": {
+      "jquery": "github:components/jquery@2.2.0"
+    }
   }
 }
