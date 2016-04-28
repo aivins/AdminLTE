@@ -11,10 +11,8 @@
  * @license MIT <http://opensource.org/licenses/MIT>
  */
 
-//Make sure jQuery has been loaded before app.js
-if (typeof jQuery === "undefined") {
-  throw new Error("AdminLTE requires jQuery");
-}
+import $ from "jquery";
+
 
 /* AdminLTE
  *
@@ -182,11 +180,11 @@ $(function () {
   }
 
   //Activate Bootstrap tooltip
-  if (o.enableBSToppltip) {
-    $('body').tooltip({
-      selector: o.BSTooltipSelector
-    });
-  }
+  // if (o.enableBSToppltip) {
+  //   $('body').tooltip({
+  //     selector: o.BSTooltipSelector
+  //   });
+  // }
 
   //Activate box widget
   if (o.enableBoxWidget) {
@@ -756,3 +754,52 @@ function _init() {
     });
   };
 }(jQuery));
+
+// ripped from:
+// https://github.com/aivins/adminlte/blob/master/dist/js/app.js
+function treeOpen(event) {
+
+  console.log("treeOpen with jquery", $.fn.jquery);
+
+  //Get the clicked link and the next element
+  var animationSpeed = $.AdminLTE.options.animationSpeed;
+  var $this = $(event.srcElement).is('a') ? $(event.srcElement) : $(event.srcElement).parents("a").first()
+  var checkElement = $this.next();
+
+
+  //Check if the next element is a menu and is visible
+  if ((checkElement.is('.treeview-menu')) && (checkElement.is(':visible')) && (!$('body').hasClass('sidebar-collapse'))) {
+    //Close the menu
+    checkElement.slideUp(animationSpeed, function () {
+      checkElement.removeClass('menu-open');
+      //Fix the layout in case the sidebar stretches over the height of the window
+      //_this.layout.fix();
+    });
+    checkElement.parent("li").removeClass("active");
+  }
+  //If the menu is not visible
+  else if ((checkElement.is('.treeview-menu')) && (!checkElement.is(':visible'))) {
+    //Get the parent menu
+    var parent = $this.parents('ul').first();
+    //Close all open menus within the parent
+    var ul = parent.find('ul:visible').slideUp(animationSpeed);
+    //Remove the menu-open class from the parent
+    ul.removeClass('menu-open');
+    //Get the parent li
+    var parent_li = $this.parent("li");
+
+    //Open the target menu and add the menu-open class
+    checkElement.slideDown(animationSpeed, function () {
+      //Add the class active to the parent li
+      checkElement.addClass('menu-open');
+      parent.find('li.active').removeClass('active');
+      parent_li.addClass('active');
+      //Fix the layout in case the sidebar stretches over the height of the window
+      $.AdminLTE.layout.fix();
+    });
+  }
+  //if this isn't a link, prevent the page from being redirected
+  if (checkElement.is('.treeview-menu')) {
+    event.preventDefault();
+  }
+};
