@@ -23,7 +23,7 @@
   },
   "jspm": {
     "dependencies": {
-      "myjquery": "github:components/jquery@2.2.0"
+      "jquery": "github:components/jquery@2.2.0"
     }
   }
 }
